@@ -7,11 +7,16 @@ public class SimpleCloudHandler : MonoBehaviour , ICloudRecoEventHandler{
 	private CloudRecoBehaviour mCloudRecoBehaviour;
 	private bool mIsScanning = false;
 	private string mTargetMetadata = "";
+
+	public GameObject GO_Scanning;
+	public GameObject GO_ResetButton;
 	
 	
 	public ImageTargetBehaviour ImageTargetTemplate;
 	
 	void Start () {	
+
+		GO_ResetButton.SetActive (false);
 		mCloudRecoBehaviour = GetComponent<CloudRecoBehaviour>();
 		if(mCloudRecoBehaviour){
 			mCloudRecoBehaviour.RegisterEventHandler(this);
@@ -52,16 +57,37 @@ public class SimpleCloudHandler : MonoBehaviour , ICloudRecoEventHandler{
 	
 	void OnGUI() {
 		// Display current 'scanning' status
-		GUI.Box (new Rect(100,100,200,50), mIsScanning ? "Scanning" : "Not scanning");
+
+		if (mIsScanning) {
+			GO_Scanning.SetActive (true);
+			GO_ResetButton.SetActive (false);
+		} else {
+			GO_Scanning.SetActive (false);
+			GO_ResetButton.SetActive (true);
+		}
+
 		// Display metadata of latest detected cloud-target
-		GUI.Box (new Rect(100,200,200,50), "Metadata: " + mTargetMetadata);
+		//GUI.Box (new Rect(100,200,200,50), "Metadata: " + mTargetMetadata);
+
 		// If not scanning, show button
 		// so that user can restart cloud scanning
+
+		if (!mIsScanning) {
+			GO_ResetButton.SetActive (true);
+		}
+
+
+		/*
 		if (!mIsScanning) {
 			if (GUI.Button(new Rect(100,300,200,50), "Restart Scanning")) {
 				// Restart TargetFinder
 				mCloudRecoBehaviour.CloudRecoEnabled = true;
 			}
 		}
+		*/
+	}
+
+	public void ResetScanning(){
+		mCloudRecoBehaviour.CloudRecoEnabled = true;
 	}
 }
