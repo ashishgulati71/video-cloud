@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Vuforia;
+using UnityEngine.UI;
 
 public class SimpleCloudHandler : MonoBehaviour , ICloudRecoEventHandler{
 //	public ImageTargetBehaviour ImageTargetTemplate;
@@ -8,10 +9,17 @@ public class SimpleCloudHandler : MonoBehaviour , ICloudRecoEventHandler{
 	private bool mIsScanning = false;
 	private string mTargetMetadata = "";
 
+	[Space(10)]
+	public GameObject GO_Video;
+
+	[Space(10)]
+	public Text debugtext;
+
+	[Space(10)]
 	public GameObject GO_Scanning;
 	public GameObject GO_ResetButton;
-	
-	
+
+
 	public ImageTargetBehaviour ImageTargetTemplate;
 	
 	void Start () {	
@@ -41,10 +49,17 @@ public class SimpleCloudHandler : MonoBehaviour , ICloudRecoEventHandler{
 			tracker.TargetFinder.ClearTrackables(false);
 		}
 	}
-	
+
 	public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult) {
 		mTargetMetadata = targetSearchResult.MetaData;
 		mCloudRecoBehaviour.CloudRecoEnabled = false;
+
+		//Video Path Set Here
+		string ggwp = "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4";
+		GO_Video.GetComponent<VideoPlaybackBehaviour> ().m_path = ggwp;
+		debugtext.text = mTargetMetadata.ToString();
+
+
 		// Build augmentation based on target
 		if (ImageTargetTemplate) {
 			// enable the new result with the same ImageTargetBehaviour:
