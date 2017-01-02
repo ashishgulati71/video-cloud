@@ -56,7 +56,7 @@ public class SimpleCloudHandler : MonoBehaviour , ICloudRecoEventHandler{
 
 		//Video Path Set Here
 		string ggwp = "https://s3.ap-south-1.amazonaws.com/unityvideo/sample10.mp4";
-		GO_Video.GetComponent<VideoPlaybackBehaviour> ().video_mpath = ggwp;
+		GO_Video.GetComponent<VideoPlaybackBehaviour> ().changed_videopath = ggwp;
 		debugtext.text = mTargetMetadata.ToString();
 
 

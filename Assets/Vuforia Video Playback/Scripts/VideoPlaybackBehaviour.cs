@@ -44,6 +44,7 @@ public class VideoPlaybackBehaviour : MonoBehaviour
     /// </summary>
     public bool m_autoPlay = false;
 
+
 	public string changed_videopath;
 
     #endregion // PUBLIC_MEMBER_VARIABLES
@@ -233,7 +234,8 @@ public class VideoPlaybackBehaviour : MonoBehaviour
 
     private IEnumerator InitVideoPlayer()
     {
-        // Initialize the video player
+
+		// Initialize the video player
         bool isMetalRendering = (VuforiaRenderer.Instance.GetRendererAPI() == VuforiaRenderer.RendererAPI.METAL);
         if (mVideoPlayer.Init(isMetalRendering))
         {
@@ -258,10 +260,9 @@ public class VideoPlaybackBehaviour : MonoBehaviour
 
     private IEnumerator LoadVideo()
     {
-        // Lock file loading
+        
+		// Lock file loading
         sLoadingLocked = true;
-
-		m_path = changed_videopath;
 
         // Load the video
         if (mVideoPlayer.Load(m_path, mMediaType, false, 0))
@@ -293,7 +294,8 @@ public class VideoPlaybackBehaviour : MonoBehaviour
 
     private IEnumerator PrepareVideo()
     {
-        // Get the video player status
+        
+		// Get the video player status
         VideoPlayerHelper.MediaState state = mVideoPlayer.GetStatus();
 
         if (state == VideoPlayerHelper.MediaState.ERROR)

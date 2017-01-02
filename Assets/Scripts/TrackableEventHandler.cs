@@ -103,7 +103,7 @@ public class TrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         {
 
 			string ggwp = "https://s3.ap-south-1.amazonaws.com/unityvideo/sample10.mp4";
-			video.video_mpath = ggwp;
+			video.changed_videopath = ggwp;
 
 
 
