@@ -101,6 +101,12 @@ public class TrackableEventHandler : MonoBehaviour, ITrackableEventHandler
         VideoPlaybackBehaviour video = GetComponentInChildren<VideoPlaybackBehaviour>();
         if (video != null && video.AutoPlay)
         {
+
+			string ggwp = "https://s3.ap-south-1.amazonaws.com/unityvideo/sample10.mp4";
+			video.video_mpath = ggwp;
+
+
+
             if (video.VideoPlayer.IsPlayableOnTexture())
             {
                 VideoPlayerHelper.MediaState state = video.VideoPlayer.GetStatus();

@@ -44,6 +44,8 @@ public class VideoPlaybackBehaviour : MonoBehaviour
     /// </summary>
     public bool m_autoPlay = false;
 
+	public string changed_videopath;
+
     #endregion // PUBLIC_MEMBER_VARIABLES
 
 
@@ -81,6 +83,15 @@ public class VideoPlaybackBehaviour : MonoBehaviour
 
 
     #region PROPERTIES
+
+	/// <summary>
+	/// Returns the video player
+	/// </summary>
+	public string video_mpath
+	{
+		get { return m_path; }
+		set { changed_videopath = value; }
+	}
 
     /// <summary>
     /// Returns the video player
@@ -249,6 +260,8 @@ public class VideoPlaybackBehaviour : MonoBehaviour
     {
         // Lock file loading
         sLoadingLocked = true;
+
+		m_path = changed_videopath;
 
         // Load the video
         if (mVideoPlayer.Load(m_path, mMediaType, false, 0))
